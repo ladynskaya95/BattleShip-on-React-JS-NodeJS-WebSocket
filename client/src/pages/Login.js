@@ -12,7 +12,7 @@ const Login = () => {
     e.preventDefault();
     if (nickname && gameId) {
       localStorage.nickname = nickname;
-      navigate("/game" + gameId)
+      navigate("/game/" + gameId)
     }
   }
 
