@@ -8,6 +8,14 @@ const Login = () => {
 
   const navigate = useNavigate()
 
+  const startPlay = (e) => {
+    e.preventDefault();
+    if (nickname && gameId) {
+      localStorage.nickname = nickname;
+      navigate("/game" + gameId)
+    }
+  }
+
   return (
     <div>Login</div>
   )
