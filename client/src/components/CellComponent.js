@@ -1,8 +1,15 @@
 import React from 'react'
 
-const CellComponent = () => {
+const CellComponent = ({cell, addMark}) => {
+
+  const cellClasses = ["cell"]
+
+  cellClasses.push(cell?.mark?.color)
+
   return (
-    <div>CellComponent</div>
+    <div className={cellClasses.join(" ")} onClick={() => addMark(cell.x, cell.y)}>
+
+    </div>
   )
 }
 

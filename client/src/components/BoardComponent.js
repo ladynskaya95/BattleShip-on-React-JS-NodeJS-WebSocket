@@ -1,8 +1,17 @@
 import React from 'react'
 
-const BoardComponent = () => {
+const BoardComponent = ({board, setBoard, shipsReady, isMyBoard, canShoot, shoot}) => {
+ 
+    const boardClasses = ["board"]
+
+    if (canShoot) {
+      boardClasses.push("active-shoot")
+    }
+
   return (
-    <div>BoardComponent</div>
+    <div className={boardClasses.join(" ")}>
+
+    </div>
   )
 }
 
