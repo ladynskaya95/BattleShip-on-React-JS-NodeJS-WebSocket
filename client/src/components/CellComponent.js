@@ -8,7 +8,10 @@ const CellComponent = ({cell, addMark}) => {
 
   return (
     <div className={cellClasses.join(" ")} onClick={() => addMark(cell.x, cell.y)}>
-
+      {cell?.mark?.name === "miss"
+        ? <div>&#183</div>
+        : <span>{cell?.mark?.logo}</span>
+      }
     </div>
   )
 }
