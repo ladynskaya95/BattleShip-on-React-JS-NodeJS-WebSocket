@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { Board } from '../models/Board';
 import BoardComponent from '../components/BoardComponent';
 
+const wsServer = new WebSocket("ws://localhost:4000")
+
 const GamePage = () => {
   const [myBoard, setMyBoard] = useState(new Board());
   const [hisBoard, setHisBoard] = useState(new Board());
@@ -27,6 +29,7 @@ const GamePage = () => {
   }
 
   useEffect(() => {
+    wsServer.send(JSON.stringify({event: "connect", payload: {username : localStorage.nickname, gameId}}))
     restart()
   }, [])
 
