@@ -1,4 +1,7 @@
 import {Cell } from "./Cell"
+import { Ship } from "./marks/Ship";
+import {Miss} from "./marks/Miss"
+import { Damage } from "./marks/Damage";
 
 export class Board {
   cells = [];
@@ -20,5 +23,17 @@ export class Board {
 
   getCells(x, y) {
     return this.cells[y][x];
+  }
+
+  addShip(x, y) {
+    new Ship(this.getCells(x, y));
+  }
+
+  addMiss(x, y) {
+    new Miss(this.getCells(x, y));
+  }
+
+  addDamage(x, y) {
+    new Damage(this.getCells(x, y));
   }
 }
