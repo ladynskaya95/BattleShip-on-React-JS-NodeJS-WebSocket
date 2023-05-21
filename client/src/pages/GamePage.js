@@ -46,10 +46,25 @@ const GamePage = () => {
           setCanShoot(true);
         }
         break;
-
+        case "afterShootByMe":
+          if (username !==localStorage.nickname) {
+            const isPerfectHit = myBoard.cells[y][x].mark?.name === "ship"
+            changeBoardAfterShoot(myBoard, setMyBoard, x, y, isPerfectHit)
+            wsServer.send(JSON.stringify({event: "checkShoot", payload: {...payload, isPerfectHit}}))
+            if (!isPerfectHit) {
+              setCanShoot(true)
+            }
+          }
+          break;
       default:
         break;
     }
+  }
+
+  function changeBoardAfterShoot(board, setBoard, x, y, isPerfectHit) {
+    isPerfectHit ? board.addDamage(x,y) : board.addMiss(x, y)
+    const newBoard = board.getCopyBoard()
+    setBoard(newBoard)
   }
 
   useEffect(() => {
