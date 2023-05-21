@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Board } from '../models/Board';
 import BoardComponent from '../components/BoardComponent';
@@ -24,8 +24,27 @@ const GamePage = () => {
     setHisBoard(newHisBoard);
   }
 
+  const navigate = useNavigate()
+
   function shoot (x, y) {
 
+  }
+
+  wsServer.onmessage = function(response) {
+    const {type, payload} = JSON.parse(response.data)
+    const {username, x, y, canStart, rivalName, success} = payload;
+
+    switch (type) {
+      case "connectToPlay": 
+        if (!success) {
+          return navigate("/")
+        }
+        setRivalName(rivalName)
+        break;
+
+        default:
+          break;
+    }
   }
 
   useEffect(() => {
