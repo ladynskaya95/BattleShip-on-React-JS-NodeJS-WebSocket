@@ -27,7 +27,7 @@ const GamePage = () => {
   const navigate = useNavigate()
 
   function shoot (x, y) {
-
+    wsServer.send(JSON.stringify({event: "shoot", payload: {username: localStorage.nickname, x, y, gameId}}))
   }
 
   wsServer.onmessage = function(response) {
