@@ -35,15 +35,20 @@ const GamePage = () => {
     const {username, x, y, canStart, rivalName, success} = payload;
 
     switch (type) {
-      case "connectToPlay": 
+      case "connectToPlay":
         if (!success) {
-          return navigate("/")
+          return navigate("/");
         }
-        setRivalName(rivalName)
+        setRivalName(rivalName);
+        break;
+      case "readyToPlay":
+        if (payload.username === localStorage.nickname && canStart) {
+          setCanShoot(true);
+        }
         break;
 
-        default:
-          break;
+      default:
+        break;
     }
   }
 
