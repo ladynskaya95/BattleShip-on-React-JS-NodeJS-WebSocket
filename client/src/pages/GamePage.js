@@ -56,6 +56,12 @@ const GamePage = () => {
             }
           }
           break;
+          case "isPerfectHit":
+            if (username === localStorage.nickname) {
+              changeBoardAfterShoot(hisBoard, setHisBoard, x, y, payload.isPerfectHit);
+              payload.isPerfectHit ? setCanShoot(true) : setCanShoot(false)
+            }
+            break;
       default:
         break;
     }
