@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Board } from '../models/Board';
 import BoardComponent from '../components/BoardComponent';
+import ActionsInfo from '../components/ActionsInfo';
 
 const wsServer = new WebSocket("ws://localhost:4000")
 
@@ -73,6 +74,11 @@ const GamePage = () => {
     setBoard(newBoard)
   }
 
+  function ready() {
+    wsServer.send(JSON.stringify({event: "ready", payload: {username: localStorage.nickname, gameId}}))
+    setShipsReady(true)
+  }
+
   useEffect(() => {
     wsServer.send(JSON.stringify({event: "connect", payload: {username : localStorage.nickname, gameId}}))
     restart()
@@ -103,6 +109,7 @@ const GamePage = () => {
           />
         </div>
       </div>
+      <ActionsInfo ready={ready} canShoot={canShoot} shipsReady={shipsReady}/>
     </div>
   );
 }
